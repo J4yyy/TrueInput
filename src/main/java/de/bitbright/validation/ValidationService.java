@@ -4,7 +4,6 @@ import de.bitbright.util.GenRes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.WebRequest;
 
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
@@ -18,7 +17,7 @@ import java.util.Map;
 @Service
 public final class ValidationService {
     //region [Category: Email Validation]
-    public ResponseEntity<Object> validateEmail(String[] email, WebRequest req) {
+    public ResponseEntity<Object> validateEmail(String[] email) {
         Map<String, Boolean> checks = new HashMap<>();
         for(String mail : email) {
             if(!mail.matches("[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}")) {
@@ -148,7 +147,7 @@ public final class ValidationService {
         IBAN_PATTERNS.put("YE", "^YE\\d{28}$"); // Yemen
     }
 
-    public ResponseEntity<Object> validateIBAN(String[] iban, WebRequest req) {
+    public ResponseEntity<Object> validateIBAN(String[] iban) {
         Map<String, Boolean> checks = new HashMap<>();
 
         for(String input : iban) {
